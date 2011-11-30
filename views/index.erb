@@ -1,0 +1,26 @@
+<form method="POST">
+  <% @pills.each do |name, detail| %>
+    <% if @latest_doses[name].nil? || Time.now.utc > @latest_doses[name] + detail[:every].hours %>
+      <input type="submit" name="pill" value="<%= name %>" class="btn success large"><br><br>
+    <% else %>
+      <a href="#" class="btn danger large"><%= name %> <%= Time.zone.utc_to_local(@latest_doses[name] + detail[:every].hours).strftime('%H:%M') %></a><br><br>
+    <% end %>
+  <% end %>
+</form>
+<table>
+  <thead>
+    <tr>
+      <th>Time</th>
+      <th>Pill</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @doses.each do |dose| %>
+    <tr>
+      <td><%= Time.zone.utc_to_local(dose.taken_at).strftime('%Y-%m-%d %H:%M') %></td>
+      <td><%= dose.pill %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+  
