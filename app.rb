@@ -18,12 +18,12 @@ DataMapper.auto_upgrade!
 
 PILLS = {
   'tylenol' => {
-    :every =>  4,
-    :mg => 1500
+    :every =>  6,
+    :mg => 1500,
   },
   'advil' => {
-    :every => 4,
-    :mg => 600
+    :every => 6,
+    :mg => 600,
   },
   'oxycodone' => {
     :every => 6,
