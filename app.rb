@@ -25,7 +25,11 @@ PILLS = {
     :every => 6,
     :mg => 600,
   },
-  'oxycodone' => {
+  'percocet' => {
+    :every => 6,
+    :mg => 5
+  },
+  'muscle relaxant' => {
     :every => 6,
     :mg => 5
   }
