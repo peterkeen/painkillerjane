@@ -1,9 +1,24 @@
-<form method="POST">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+<form method="POST" id="form">
+  <input type="hidden" id="count" name="count" value="1">
+  <input type="hidden" id="pill" name="pill" value="">
+</form>
   <% @pills.each do |name, detail| %>
     <% if @latest_doses[name].nil? || Time.now.utc > @latest_doses[name] + detail[:every].hours %>
-      <input type="submit" name="pill" value="<%= name %>" class="btn success large"><br><br>
+      <button id="<%= name %>" name="pill" value="<%= name %>" class="btn success large" style="width: 15em"><%= name %></button><br><br>
+      <script type="text/javascript">
+        $(function() {
+          $('#<%= name %>').click(function() {
+            <% if detail[:prompt] %>
+            $('#count').val(prompt('how many?'));
+            <% end %>
+            $('#pill').val('<%= name %>');
+            $('#form').submit();
+          });
+        });
+      </script>
     <% else %>
-      <a href="#" class="btn danger large"><%= name %> <%= Time.zone.utc_to_local(@latest_doses[name] + detail[:every].hours).strftime('%H:%M') %></a><br><br>
+      <button class="btn danger large" style="width: 15em"><%= name %> <%= Time.zone.utc_to_local(@latest_doses[name] + detail[:every].hours).strftime('%l:%M %P') %></button><br><br>
     <% end %>
   <% end %>
 </form>
@@ -12,6 +27,7 @@
     <tr>
       <th>Time</th>
       <th>Pill</th>
+      <th>Count</th>
     </tr>
   </thead>
   <tbody>
@@ -19,6 +35,7 @@
     <tr>
       <td><%= Time.zone.utc_to_local(dose.taken_at).strftime('%Y-%m-%d %H:%M') %></td>
       <td><%= dose.pill %></td>
+      <td><%= dose.count %></td>
     </tr>
     <% end %>
   </tbody>

@@ -12,6 +12,7 @@ class Dose
   property :taken_at, DateTime
   property :pill,     Text
   property :mg,       Integer
+  property :count,    Integer
 end
 
 DataMapper.auto_upgrade!
@@ -20,16 +21,19 @@ PILLS = {
   'tylenol' => {
     :every =>  6,
     :mg => 1500,
+    :prompt => true,
   },
   'advil' => {
     :every => 6,
     :mg => 600,
+    :prompt => true,
   },
   'percocet' => {
     :every => 6,
-    :mg => 5
+    :mg => 5,
+    :prompt => true
   },
-  'muscle relaxant' => {
+  'musclerelaxant' => {
     :every => 6,
     :mg => 5
   }
@@ -37,9 +41,9 @@ PILLS = {
 
 class App < Sinatra::Application
 
-  use Rack::Auth::Basic, "Painkiller Jane" do |username, password|
-    [username, password] == [ENV['PKJ_USER'], ENV['PKJ_PASS']]
-  end
+  # use Rack::Auth::Basic, "Painkiller Jane" do |username, password|
+  #   [username, password] == [ENV['PKJ_USER'], ENV['PKJ_PASS']]
+  # end
 
   before do
     @pills = PILLS
@@ -58,11 +62,13 @@ class App < Sinatra::Application
 
   post '/' do
     pill = params['pill']
+    count = params['count']
     details = PILLS[pill]
     @dose = Dose.create(
       :pill     => pill,
       :mg       => details[:mg],
-      :taken_at => Time.now.utc
+      :taken_at => DateTime.now.new_offset(0),
+      :count    => count
     )
     redirect '/'
   end
