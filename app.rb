@@ -23,13 +23,8 @@ PILLS = {
     :mg => 1500,
     :prompt => true,
   },
-  'advil' => {
-    :every => 6,
-    :mg => 600,
-    :prompt => true,
-  },
   'percocet' => {
-    :every => 6,
+    :every => 3,
     :mg => 5,
     :prompt => true
   },
