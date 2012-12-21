@@ -27,12 +27,12 @@ PILLS = {
     :every => 6,
     :mg => 200,
     :prompt => true,
+  },
   'vicodin' => {
     :every => 6,
     :mg => 500,
     :prompt => true
   },
-
 }
 
 class App < Sinatra::Application
