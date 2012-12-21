@@ -20,18 +20,19 @@ DataMapper.auto_upgrade!
 PILLS = {
   'tylenol' => {
     :every =>  6,
-    :mg => 1500,
+    :mg => 500,
     :prompt => true,
   },
-  'percocet' => {
-    :every => 3,
-    :mg => 5,
+  'advil' => {
+    :every => 6,
+    :mg => 200,
+    :prompt => true,
+  'vicodin' => {
+    :every => 6,
+    :mg => 500,
     :prompt => true
   },
-  'musclerelaxant' => {
-    :every => 6,
-    :mg => 5
-  }
+
 }
 
 class App < Sinatra::Application
