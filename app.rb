@@ -33,6 +33,18 @@ PILLS = {
     :mg => 500,
     :prompt => true
   },
+  'zofran' => {
+    :every => 12,
+    :mg => 8,
+  },
+  'compazine' => {
+    :every => 6,
+    :mg => 10,
+  },
+  'decadron' => {
+    :every => 12,
+    :mg => 8
+  }
 }
 
 class App < Sinatra::Application
