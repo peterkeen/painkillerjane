@@ -45,6 +45,10 @@ PILLS = {
     :every => 12,
     :mg => 8
   }
+  'ativan' => {
+    :every => 6,
+    :mg => 1
+  }
 }
 
 class App < Sinatra::Application
